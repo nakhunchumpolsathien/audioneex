@@ -49,7 +49,7 @@ TOKYO_CONFIG_PARAMS="\
 # The packages' URLs
 DEPS=(
    "https://www.ssisc.org/fftss/dl/fftss-3.0-20071031.tar.gz"
-   "https://fallabs.com/tokyocabinet/tokyocabinet-1.4.48.tar.gz"
+   "http://nk-us.oss-us-west-1.aliyuncs.com/tokyocabinet-1.4.48.tar.gz"
 )
 
 # Configuration parameters map
