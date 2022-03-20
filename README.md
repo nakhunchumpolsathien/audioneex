@@ -39,7 +39,7 @@ The engine needs the following dependencies
 After compiling and installing the dependencies, open a shell and issue the 
 following commands to start the build process
 
-    $ git clone https://github.com/a-gram/audioneex.git
+    $ git clone https://github.com/nakhunchumpolsathien/audioneex
     $ cd audioneex
     $ ./build WITH_EXAMPLES=ON
 
