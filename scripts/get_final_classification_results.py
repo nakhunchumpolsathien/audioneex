@@ -22,7 +22,7 @@ if __name__ == '__main__':
     output_csv_path = Confidential.output_csv
     score_df = pd.read_csv(score_csv_path, encoding='utf-8')
     score_df = score_df.sort_values(by='file_name', ascending=True).reset_index(drop=True)
-    mode = 'internet'
+    mode = 'radio'
 
     if mode == 'internet':
         score_threshold = Confidential.score_threshold_int
@@ -87,8 +87,12 @@ if __name__ == '__main__':
                     next_index = next_index + 1
                     current_index = current_index + 1
 
-                    if not score_df.iloc[current_index]['matched_fid'] == score_df.iloc[next_index]['matched_fid']:
+                    if current_index == score_df.index[-1]:
                         is_repeated = False
+                    else:
+                        if not score_df.iloc[current_index]['matched_fid'] == score_df.iloc[next_index]['matched_fid']:
+                            is_repeated = False
+
 
             ads_info = {'start': current_times['start_time'], 'end': current_times['end_time'],
                         'ads_brand': row['ads_brand'], 'ads_description': row['ads_title'],
