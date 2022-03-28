@@ -85,6 +85,7 @@ class IdentificationTask : public IdTask
               m_Listener->OnResults( results );
            else
               std::cout << "Not enough audio." << std::endl;
+              std::cout << "=========================================================" << std::endl;
 
            // IMPORTANT:
            // Always reset the recognizer for new identifications if reused.
@@ -174,13 +175,13 @@ class FileIdentificationResultsParser : public IdentificationResultsListener
            // The audio was identified.
            if(BestMatch[0].IdClass == Audioneex::IDENTIFIED)
            {
-               std::cout << "=========================================================" << std::endl;
+//               std::cout << "=========================================================" << std::endl;
                std::cout << "IDENTIFIED  FID: " << BestMatch[0].FID << std::endl;
                std::cout << "Score: " << BestMatch[0].Score << ", ";
                std::cout << "Conf.: " << BestMatch[0].Confidence << ", ";
                std::cout << "Id.Time: " << m_Recognizer->GetIdentificationTime() << "s"<<std::endl;
                std::cout << (meta.empty() ? "No metadata" : meta) << std::endl;
-               std::cout << "=========================================================" << std::endl;
+//               std::cout << "=========================================================" << std::endl;
            }
 
            // The audio have similarities with the found match, but not so strong
@@ -210,6 +211,7 @@ class FileIdentificationResultsParser : public IdentificationResultsListener
         }
 
         std::cout << "ID Time: " << m_Recognizer->GetIdentificationTime() << " s" << std::endl;
+        std::cout << "=========================================================" << std::endl;
     }
 
     void SetDatastore(std::shared_ptr<KVDataStore> &store)
