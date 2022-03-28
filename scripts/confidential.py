@@ -2,6 +2,7 @@
 class Confidential:
     output_csv = 'test.csv'
     classify_log_path = ''
+    output_dir = ''
 
     iwads_host = ''
     iwads_username = ''
