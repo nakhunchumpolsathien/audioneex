@@ -22,16 +22,14 @@ if __name__ == '__main__':
     output_csv_path = Confidential.output_csv
     score_df = pd.read_csv(score_csv_path, encoding='utf-8')
     score_df = score_df.sort_values(by='file_name', ascending=True).reset_index(drop=True)
-    score_threshold = 200
-    conf_threshold = 0.8
     mode = 'internet'
 
     if mode == 'internet':
-        score_threshold = 200
-        conf_threshold = 0.80
+        score_threshold = Confidential.score_threshold_int
+        conf_threshold = Confidential.conf_threshold_int
     elif mode == 'radio':
-        score_threshold = 250
-        conf_threshold = 0.85
+        score_threshold = Confidential.score_threshold_radio
+        conf_threshold = Confidential.conf_threshold_radio
 
     res = []
     score_df_len = len(score_df)
