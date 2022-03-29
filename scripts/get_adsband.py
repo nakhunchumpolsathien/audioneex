@@ -5,7 +5,6 @@ import re
 import pandas as pd
 import codecs
 import mariadb
-from datetime import datetime, timedelta
 
 
 def db_connection():
@@ -35,6 +34,7 @@ def clean_text(text):
     text = text.replace('...', '')
     return text
 
+
 def if_empty_match(_list):
     if len(_list) < 1:
         return None
@@ -48,8 +48,13 @@ def get_brand_info(db_conn, afpid):
     records = cur.fetchall()
     record = if_empty_match(records)
 
+    if record[1] != '':
+        ads_brand = record[1]
+    else:
+        ads_brand = record[2]
+
     if record is not None:
-        return {'ads_brand': record[2], 'ads_title': clean_text(record[3]), 'ads_type': record[4]}
+        return {'ads_brand': ads_brand, 'ads_title': clean_text(record[3]), 'ads_type': record[4]}
     else:
         return {'ads_brand': None, 'ads_title': None, 'ads_type': None}
 
@@ -115,8 +120,11 @@ if __name__ == '__main__':
         output_df.loc[index, 'ads_type'] = brand_info['ads_type']
 
         if not os.path.isfile(output_csv_path):
-            output_df.to_csv(output_csv_path, index=False, encoding='utf-8', header=output_df.columns)
+            output_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig', header=output_df.columns)
         else:
-            output_df.to_csv(output_csv_path, index=False, encoding='utf-8', mode='a', header=False)
+            output_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig', mode='a', header=False)
         index = + 1
 
+    df = pd.read_csv(output_csv_path, encoding='utf-8')
+    df = df.sort_values(by='file_name', ascending=True).reset_index(drop=True)
+    df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
